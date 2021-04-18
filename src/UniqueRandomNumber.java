@@ -7,14 +7,14 @@ public class UniqueRandomNumber {
      */
 
     private ArrayList<Integer> stockedNumbers;
-    private int minValue;
-    private int maxValue;
+    private int drawnTimes;
 
     public UniqueRandomNumber(int number) {
         stockedNumbers = new ArrayList<Integer>();
         for (int i = 0; i < number; i++) {
             stockedNumbers.add(i);
         }
+        drawnTimes = 0;
     }
 
     public UniqueRandomNumber(int min, int max) {
@@ -22,6 +22,7 @@ public class UniqueRandomNumber {
         for (int i = min; i <= max; i++) {
             stockedNumbers.add(i);
         }
+        drawnTimes = 0;
     }
 
     public int draw() {
@@ -29,11 +30,16 @@ public class UniqueRandomNumber {
         int randomIndex = random.nextInt(stockedNumbers.size());
         int retVal = stockedNumbers.get(randomIndex);
         stockedNumbers.remove(randomIndex);
+        drawnTimes++;
         return retVal;
     }
 
     public boolean isDrawable() {
         return stockedNumbers.size() > 0;
+    }
+
+    public int getDrawnTimes() {
+        return drawnTimes;
     }
 
     public static void main(String[] args) {
